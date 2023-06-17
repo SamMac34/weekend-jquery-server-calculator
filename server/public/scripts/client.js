@@ -1,4 +1,4 @@
-const { response } = require("express");
+// const { response } = require("express");
 
 $(document).ready(onReady);
     console.log('JS ready!');
@@ -11,6 +11,9 @@ function onReady() {
 
     // submit listener
     $('#submit-btn').on('click', compute)
+
+    // math operation button listeners
+    $('.operation-type').on('click', captureOperation)
 
 }
 
@@ -27,13 +30,14 @@ function getHistory() {
         console.log('Error from server!', error);
     });
 }
+
 // POST request to submit/Compute the equation
 function compute(event) {
     event.preventDefault();
 
     const firstNumberInput = $('#first-number-input').val();
     const secondNumberInput = $('#second-number-input').val();
-    const operationType = $('.operation-type').val();
+    operationType = $('.operation-type').val();
 
     $.ajax({
         method: 'POST',
@@ -52,5 +56,28 @@ function compute(event) {
         alert('Error posting to server!');
         console.log('Error posting to server', error);
     })
-}
+};
 
+// Capture the operationType button value
+function captureOperation(event) {
+    event.preventDefault();
+    let operationType = $('.operation-type').val();
+    console.log('in captureOperation, value is:', operationType);
+
+};
+
+// function preventDefault(event) {
+//     event.preventDefault();
+// }
+
+function render(response) {
+    $('#history').empty();
+
+    for( let equation of response) {
+        $('#history').append(`
+            <li>
+                ${equation.num1} ${equation.operation} ${equation.num2} = ${equation.answer}
+            </li>
+        `)
+    }
+};
