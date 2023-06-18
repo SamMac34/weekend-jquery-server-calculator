@@ -31,8 +31,8 @@ app.post('/calcs', (req, res) => {
 
     // Generate answer
     calculateAnswer();
-
     console.log('in app.post, answer is:', answer);
+    
     // Add answer property to calcHistory
     req.body.calcToAdd.answer = answer
     console.log('In POST request, data is:', req.body);

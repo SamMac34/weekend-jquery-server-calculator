@@ -1,5 +1,3 @@
-// const { response } = require("express");
-
 $(document).ready(onReady);
     console.log('JS ready!');
 
@@ -18,7 +16,7 @@ function onReady() {
     $('#inputs').on('click', '.multiply-btn', captureOperation);
     $('#inputs').on('click', '.divide-btn', captureOperation);
 
-
+    // Clear inputs listener
     $('#inputs').on('click', '#clear-btn', clearInputs);
 
 
@@ -46,38 +44,39 @@ function compute(event) {
 
     const firstNumberInput = $('#first-number-input').val();
     const secondNumberInput = $('#second-number-input').val();
-    console.log('operationType is:', operationType)
-
-    // If statement to prevent usage without inputting math operation
+    
+    // If statement to require math operation input
     if( operationType == undefined ) {
-        alert('Must enter operator +, -, *, or / .')
-        console.log('must enter operator')
+        alert( 'Must enter operator +, -, *, or / .' );
+    } else if( firstNumberInput == '' ) {
+        alert( 'Must enter a value for First Number!' );
+    } else if( secondNumberInput == '' ) {
+        alert( 'Must enter a value for Second Number' );
     } else {
-    $.ajax({
-        method: 'POST',
-        url: '/calcs',
-        data: {
-            calcToAdd: {
-                num1: firstNumberInput,
-                num2: secondNumberInput,
-                operation: operationType
+        $.ajax({
+            method: 'POST',
+            url: '/calcs',
+            data: {
+                calcToAdd: {
+                    num1: firstNumberInput,
+                    num2: secondNumberInput,
+                    operation: operationType
+                }
             }
-        }
-    }).then((response) => {
-        console.log('Success posting calc to server!', response);
-        getHistory();
-    }).catch((error) => {
-        alert('Error posting to server!');
-        console.log('Error posting to server', error);
-    })
-};
+        }).then((response) => {
+            console.log('Success posting calc to server!', response);
+            getHistory();
+        }).catch((error) => {
+            alert('Error posting to server!');
+            console.log('Error posting to server', error);
+        })
+    };
 };
 
 // Capture the operationType button value
 function captureOperation(event) {
     event.preventDefault();
     operationType = `${this.value}`;
-    // console.log ('this is:', this.value)
 
 };
 
@@ -105,4 +104,6 @@ function clearInputs(event) {
     event.preventDefault();
     $('#first-number-input').val('');
     $('#second-number-input').val('');
+    $('#answer').val('');
+    
 };
