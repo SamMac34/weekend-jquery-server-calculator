@@ -10,32 +10,9 @@ app.use(express.static('server/public'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Data after calculating answer
-let calcHistory = [ { 
-    num1: 10, 
-    num2: 20,
-    operation: '+',
-    answer: 30,
-} ,
-{ 
-    num1: 100, 
-    num2: 50,
-    operation: '-',
-    answer: 50
-} ]
-
-// Data before calculating answer
-let calcList = [ { 
-    num1: 10, 
-    num2: 20,
-    operation: '+'
-},
-{ 
-    num1: 100, 
-    num2: 50,
-    operation: '-'
-} ]
-
+let answer;
+// Data array
+let calcHistory = [];
 
 
 // Route to get calculations history
@@ -44,51 +21,38 @@ app.get('/history', (req, res) => {
     res.send(calcHistory)
 });
 
+
 // Route to POST calculations from client.js
 app.post('/calcs', (req, res) => {
     console.log('In POST request, data is:', req.body);
 
-    // Push new equation variables to calcList
-    calcList.push(req.body.calcToAdd);
-
-    res.sendStatus(201);
+    // Push new equation variables to calcHistory
+    calcHistory.push(req.body.calcToAdd);
 
     // Generate answer
     calculateAnswer();
 
+    console.log('in app.post, answer is:', answer);
+    // Add answer property to calcHistory
+    req.body.calcToAdd.answer = answer
+    console.log('In POST request, data is:', req.body);
+
+    res.sendStatus(201);
 });
 
+
 function calculateAnswer() {
-    // let answer = ` ${num1} ${operation} ${num2} `;
-    // let answer = calcList.num1 `${calcList.operation}` //calcList.num2
-    let answerToAdd = {
-        num1: calcList[calcList.length - 1].num1,
-        num2: calcList[calcList.length - 1].num2,
-        operation: calcList[calcList.length - 1].operation
-    }
-    console.log('answerToAdd is:', answerToAdd);
-
-    if(calcList[calcList.length - 1].operation == '+' ) {
-        answerToAdd.answer = Number(calcList[calcList.length - 1].num1) + Number(calcList[calcList.length - 1].num2);
-        console.log('in calculateAnswer if, answer is:', answerToAdd.answer);
-    } else {
-        answerToAdd.answer = 1010;
-        console.log('in calculateAnswer else, answer is:', answerToAdd.answer);
+    if(calcHistory[calcHistory.length - 1].operation == '+' ) {
+        answer = Number(calcHistory[calcHistory.length - 1].num1) + Number(calcHistory[calcHistory.length - 1].num2);
+        console.log('in calculateAnswer if, answer is:', answer);
+    } else if(calcHistory[calcHistory.length - 1].operation == '-') {
+        answer = Number(calcHistory[calcHistory.length - 1].num1) - Number(calcHistory[calcHistory.length - 1].num2);
+        console.log('in calculateAnswer else if, answer is:', answer);
     }
 
-    console.log('answerToAdd is:', answerToAdd);
-
-
-    calcHistory.push(answerToAdd);
+    // calcHistory.answer = answer
+    console.log('answer is:', answer);
 };
-
-    // } else if( calcList.operation = '-');
-    // console.log('in calculateAnswer, answer is:', answer); 
-// };
-
-
-
-
 
 
 

@@ -31,7 +31,7 @@ function getHistory() {
     });
 }
 
-// POST request to submit/Compute the equation
+// POST request to submit the equation to server
 function compute(event) {
     event.preventDefault();
 
@@ -80,4 +80,15 @@ function render(response) {
             </li>
         `)
     }
+
+    // if(calcHistory.length > 3)
+    // $('#answer').empty();
+    // $('#answer').append(`
+    //     <h2>
+    //         The answer is: ${equation.answer}
+    //     </h2>
+    // `)
+
 };
+
+        // The answer is: ${calcHistory[calcHistory.length -1]}
