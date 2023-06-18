@@ -104,6 +104,6 @@ function clearInputs(event) {
     event.preventDefault();
     $('#first-number-input').val('');
     $('#second-number-input').val('');
-    $('#answer').val('');
+    $('#answer').empty();
     
 };
