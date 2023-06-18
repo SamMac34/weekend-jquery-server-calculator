@@ -19,7 +19,8 @@ function onReady() {
     $('#inputs').on('click', '.divide-btn', captureOperation);
 
 
-    // $('#inputs').on('click', '.minus-btn', captureOperation);
+    $('#inputs').on('click', '#clear-btn', clearInputs);
+
 
 }
 
@@ -74,10 +75,7 @@ function captureOperation(event) {
 
 };
 
-// function preventDefault(event) {
-//     event.preventDefault();
-// }
-
+// Render data to page
 function render(response) {
     $('#history').empty();
 
@@ -96,4 +94,9 @@ function render(response) {
     }
 };
 
-        // The answer is: ${calcHistory[calcHistory.length -1]}
+// Clear inputs
+function clearInputs(event) {
+    event.preventDefault();
+    $('#first-number-input').val('');
+    $('#second-number-input').val('');
+}
