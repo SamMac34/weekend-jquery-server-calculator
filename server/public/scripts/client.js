@@ -45,7 +45,6 @@ function compute(event) {
 
     const firstNumberInput = $('#first-number-input').val();
     const secondNumberInput = $('#second-number-input').val();
-    // operationType = $('.operation-type').val();
     console.log('operationType is:', operationType)
 
     $.ajax({
@@ -71,9 +70,7 @@ function compute(event) {
 function captureOperation(event) {
     event.preventDefault();
     operationType = `${this.value}`;
-    // Use 'this'
-    console.log ('this is:', this.value)
-    // console.log('in captureOperation, value is:', operationType);
+    // console.log ('this is:', this.value)
 
 };
 
