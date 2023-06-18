@@ -1,0 +1,42 @@
+body {
+    background-color: darkgray;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    margin: auto;
+
+}
+
+h1 {
+    padding-bottom: 50px;
+}
+
+h3 {
+    padding-bottom: 1px;
+}
+form {
+    padding-bottom: 50px;
+}
+
+#answer {
+    margin: auto;
+    padding-bottom: 10px;
+    padding-top: 1px;
+}
+ul {
+    background-color: white;
+    min-height: 200px;
+    height: auto;
+    min-width: 200px;
+    max-width: 400px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    padding: 20px 5px 20px 50px;
+    overflow: auto;
+}
+
+li {
+    font-size: 18px;
+    text-align: left;
+}
