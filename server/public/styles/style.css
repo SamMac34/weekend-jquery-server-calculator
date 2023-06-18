@@ -3,7 +3,8 @@ body {
     font-family:Georgia, 'Times New Roman', Times, serif;
     text-align: center;
     margin: auto;
-
+    background-image: radial-gradient(circle);
+    
 }
 
 h1 {

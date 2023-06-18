@@ -48,6 +48,11 @@ function compute(event) {
     const secondNumberInput = $('#second-number-input').val();
     console.log('operationType is:', operationType)
 
+    // If statement to prevent usage without inputting math operation
+    if( operationType == undefined ) {
+        alert('Must enter operator +, -, *, or / .')
+        console.log('must enter operator')
+    } else {
     $.ajax({
         method: 'POST',
         url: '/calcs',
@@ -65,6 +70,7 @@ function compute(event) {
         alert('Error posting to server!');
         console.log('Error posting to server', error);
     })
+};
 };
 
 // Capture the operationType button value
@@ -99,4 +105,4 @@ function clearInputs(event) {
     event.preventDefault();
     $('#first-number-input').val('');
     $('#second-number-input').val('');
-}
+};
