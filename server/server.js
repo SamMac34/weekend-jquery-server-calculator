@@ -48,12 +48,15 @@ function calculateAnswer() {
     } else if(calcHistory[calcHistory.length - 1].operation == '-') {
         answer = Number(calcHistory[calcHistory.length - 1].num1) - Number(calcHistory[calcHistory.length - 1].num2);
         console.log('in calculateAnswer else if, answer is:', answer);
-    }
-
-    // calcHistory.answer = answer
+    } else if(calcHistory[calcHistory.length - 1].operation == '*') {
+        answer = Number(calcHistory[calcHistory.length - 1].num1) * Number(calcHistory[calcHistory.length - 1].num2);
+        console.log('in calculateAnswer else if, answer is:', answer);
+    } else if(calcHistory[calcHistory.length - 1].operation == '/') {
+            answer = Number(calcHistory[calcHistory.length - 1].num1) / Number(calcHistory[calcHistory.length - 1].num2);
+            console.log('in calculateAnswer else if, answer is:', answer);
+    };
     console.log('answer is:', answer);
 };
-
 
 
 

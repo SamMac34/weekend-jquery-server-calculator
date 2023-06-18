@@ -11,19 +11,20 @@
 <body>
     <h1>Server Side Calculator</h1>
 
-    <form>
+    <form id="inputs">
         <input id="first-number-input" type="number" placeholder="First Number">
-        <button class="operation-type" value="+">+</button>
-        <button class="operation-type">-</button>
-        <button class="operation-type">*</button>
-        <button class="operation-type">/</button>
+        <button class="plus-btn" value="+">+</button>
+        <button class="minus-btn" value="-">-</button>
+        <button class="multiply-btn" value="*">*</button>
+        <button class="divide-btn" value="/">/</button>
         <input id="second-number-input" type="number" placeholder="Second Number">
         <button id="submit-btn">=</button>
         <button id="clear-btn">C</button>
     </form>
     <div id="answer">
-        <h2>Answer = </h2>
+        <h2></h2>
     </div>
+    <h3>Previous Calculations</h3>
     <ul id="history">
         <li>History</li>
         <li>goes</li>

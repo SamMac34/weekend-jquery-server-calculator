@@ -4,18 +4,26 @@ $(document).ready(onReady);
     console.log('JS ready!');
 
 function onReady() {
-    console.log('JQ ready!')
+    console.log('JQ ready!');
 
     // Get calculations history
     getHistory();
 
     // submit listener
-    $('#submit-btn').on('click', compute)
+    $('#submit-btn').on('click', compute);
 
     // math operation button listeners
-    $('.operation-type').on('click', captureOperation)
+    $('#inputs').on('click', '.plus-btn',  captureOperation);
+    $('#inputs').on('click', '.minus-btn', captureOperation);
+    $('#inputs').on('click', '.multiply-btn', captureOperation);
+    $('#inputs').on('click', '.divide-btn', captureOperation);
+
+
+    // $('#inputs').on('click', '.minus-btn', captureOperation);
 
 }
+
+let operationType;
 
 // GET request to display calculations history
 function getHistory() {
@@ -37,7 +45,8 @@ function compute(event) {
 
     const firstNumberInput = $('#first-number-input').val();
     const secondNumberInput = $('#second-number-input').val();
-    operationType = $('.operation-type').val();
+    // operationType = $('.operation-type').val();
+    console.log('operationType is:', operationType)
 
     $.ajax({
         method: 'POST',
@@ -61,8 +70,10 @@ function compute(event) {
 // Capture the operationType button value
 function captureOperation(event) {
     event.preventDefault();
-    let operationType = $('.operation-type').val();
-    console.log('in captureOperation, value is:', operationType);
+    operationType = `${this.value}`;
+    // Use 'this'
+    console.log ('this is:', this.value)
+    // console.log('in captureOperation, value is:', operationType);
 
 };
 
@@ -79,16 +90,13 @@ function render(response) {
                 ${equation.num1} ${equation.operation} ${equation.num2} = ${equation.answer}
             </li>
         `)
+        $('#answer').empty();
+        $('#answer').append(`
+            <h2>
+                ${equation.num1} ${equation.operation} ${equation.num2} = ${equation.answer}
+            </h2>
+        `)  
     }
-
-    // if(calcHistory.length > 3)
-    // $('#answer').empty();
-    // $('#answer').append(`
-    //     <h2>
-    //         The answer is: ${equation.answer}
-    //     </h2>
-    // `)
-
 };
 
         // The answer is: ${calcHistory[calcHistory.length -1]}
